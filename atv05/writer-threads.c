@@ -110,7 +110,7 @@ int main() {
     };
 
     // Cria as threads
-    if (pthread_create(&writer, NULL, writer_thread, &data) {
+    if (pthread_create(&writer, NULL, writer_thread, &data)) {
         perror("pthread_create writer");
         exit(1);
     }

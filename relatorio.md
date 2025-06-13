@@ -13,20 +13,22 @@ Execução de código C dentro do container Docker criando um ambiente isolado d
 
 ### Criando Imagem através do Dockerfile
 
-Executei um Dockerfile criado com base nas informações da proposta da atividade. Contendo configurações necessárias para gerar uma imagem baseada na distro Fedora, incluindo o compilador para códigos C. Assim, baixei a imagem base do Fedora e fiz a instalação de todos os pacotes solicitados no Dockerfile.
+Executei um Dockerfile criado com base nas informações da proposta da atividade. Contendo configurações necessárias para gerar uma imagem baseada na distribuição Fedora, incluindo o compilador para códigos C. Assim, baixei a imagem base do Fedora e fiz a instalação de todos os pacotes solicitados no Dockerfile.
+
+<img alt="build " src="./images/build.png"/>
 
 ### Execução do Container
 
-<img alt="build " src="./images/container-exec.png"/>
+<img alt="build " src="./images/run.png"/>
 
-A partir da execução da imagem, o terminal fish foi inicializado, indicando que o ambiente isolado foi criado com sucesso.
+A partir da execução da imagem, o terminal fish foi inicializado, indicando que o ambiente isolado fish foi criado com sucesso.
 
 ## 3. Compilação e execução de códigos
 
 Uma vez que entrei no shell fish, compilei e executei o código C conforme citados no readme.
 
 <div>
-    <img alt="build " src="./images/original-code.png"/>
+    <img alt="build " src="./images/run.png"/>
 </div>
 
 Conforme solicitado, modifiquei o código original, .

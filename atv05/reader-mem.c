@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <unistd.h>
 
-#define SHM_SIZE 1024  // Tamanho da memória compartilhada
+#define SHM_SIZE 1024
 
 int main() {
     int shmid;
-    key_t key = 1234;  // Chave única para a memória compartilhada
-    char *shm, *data;
+    key_t key = 1234;  // Mesma chave usada no escritor
+    char *shm;
 
-    // Cria um segmento de memória compartilhada
-    shmid = shmget(key, SHM_SIZE, IPC_CREAT | 0666);
+    // Obtém o segmento de memória compartilhada
+    shmid = shmget(key, SHM_SIZE, 0666);
     if (shmid == -1) {
         perror("shmget");
         exit(1);
@@ -26,21 +25,15 @@ int main() {
         exit(1);
     }
 
-    // Escreve na memória compartilhada
-    strcpy(shm, "Olá, Memória Compartilhada!");
+    // Lê a mensagem da memória compartilhada
+    printf("Leitor: Mensagem lida: \"%s\"\n", shm);
 
-    printf("Escritor: Mensagem escrita na memória compartilhada.\n");
-    printf("Escritor: Aguardando leitura...\n");
-
-    // Espera até que o leitor sinalize que terminou (modificando o primeiro byte)
-    while (*shm != '*') {
-        sleep(1);
-    }
+    // Sinaliza para o escritor que terminou (modificando o primeiro byte)
+    *shm = '*';
 
     // Libera a memória compartilhada
     shmdt(shm);
-    shmctl(shmid, IPC_RMID, NULL);  // Remove o segmento
 
-    printf("Escritor: Memória compartilhada liberada.\n");
+    printf("Leitor: Finalizado.\n");
     return 0;
 }
